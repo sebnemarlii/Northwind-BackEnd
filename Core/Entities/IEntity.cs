@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Entities.Abstract
+namespace Core.Entities
 {
     //2.Adım
     //IEntity =bir veri tabanı nesnesidir demek
