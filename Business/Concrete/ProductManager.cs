@@ -1,9 +1,13 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
+using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -19,20 +23,21 @@ namespace Business.Concrete
             _productDal = productDal;
         }
 
+
+        [ValidationAspect(typeof(ProductValidator))] //Attribute=parametreyi okuyup ilgili kodu okuyup işlem yapacak
         public IResult Add(Product product)
         {
-            if (product.ProductName.Length<2)
-            {
-                return new ErrorResult(Messages.ProductNameInvalid);
-            }
-            _productDal.Add(product);
+            //business codes
 
+            //validation -doğrulama --Yukarıda ValidationAspects kullandığımız için bu satıra gerek kalmadı.
+            //ValidationTool.Validate(new ProductValidator(), product);
+
+            _productDal.Add(product);
             return new SuccessResult(Messages.ProductAdded);
         }
 
         public IDataResult<List<Product>> GetAll()
         {
-            //iş kodları
             if (DateTime.Now.Hour==22)
             {
                 return new ErrorDataResult<List<Product>>(Messages.MaintenanceTime);

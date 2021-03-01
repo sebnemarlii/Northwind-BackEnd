@@ -34,8 +34,8 @@ namespace WebAPI
             services.AddControllers();
 
             //Bu tipte bi baðýmlýlýk görürsen arka planda bizim için newler ve istediðimizi verir.
-            services.AddSingleton<IProductService,ProductManager>();
-            services.AddSingleton<IProductDal, EfProductDal>();
+            //services.AddSingleton<IProductService,ProductManager>();
+            //services.AddSingleton<IProductDal, EfProductDal>();
 
         }
 
